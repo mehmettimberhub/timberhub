@@ -1,7 +1,9 @@
-<a class="btn btn-primary" href="{{route('suppliers.create')}}">
-    New Supplier
-</a>
 <x-datatable :records="$records">
+    <x-slot name="createButton">
+        <a class="btn btn-primary" href="{{route('suppliers.create')}}">
+            New Supplier
+        </a>
+    </x-slot>
     <x-slot name="extra_criterias">
 
     </x-slot>
@@ -21,10 +23,9 @@
                        class="btn btn-xs btn-primary">
                         <i class="fa fa-sm fa-edit"></i>
                     </a>
-                    <a href="{{route('suppliers.destroy', ['supplier' => $record->id])}}"
-                           class="btn btn-xs btn-danger">
-                        <i class="fa fa-sm fa-trash"></i>
-                    </a>
+
+                    <button type="button" wire:click="delete({{$record->id}})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>
+                    </button>
                 </td>
             </tr>
         @endforeach

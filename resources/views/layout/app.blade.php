@@ -17,6 +17,7 @@
     <link href="{{asset('assets/fontawesome-free-6.2.0-web/css/fontawesome.css')}}" rel="stylesheet">
     <link href="{{asset('assets/fontawesome-free-6.2.0-web/css/brand.css')}}" rel="stylesheet">
     <link href="{{asset('assets/fontawesome-free-6.2.0-web/css/solid.css')}}" rel="stylesheet">
+    <link href="{{asset('css/toastr/toastr.min.css')}}" rel="stylesheet">
     @livewireStyles
     @section('styles')
 </head>
@@ -61,12 +62,33 @@
         </main>
     </div>
 </div>
-
-
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 @livewireScripts
 
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('js/toastr/toastr.min.js')}}"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+@if(Session::has('success') || Session::has('danger'))
+    <script>
+        $(function () {
+            toastr.options = {
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }
+            @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+            @elseif(Session::has('danger'))
+            toastr.error("{{ Session::get('danger') }}");
+            @endif
+        })
+    </script>
+@endif
 </body>
 </html>
 

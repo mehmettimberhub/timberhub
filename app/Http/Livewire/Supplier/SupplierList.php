@@ -4,7 +4,10 @@ namespace App\Http\Livewire\Supplier;
 
 use App\Http\Livewire\LivewireDatatable;
 use Illuminate\View\View;
+use Livewire\Redirector;
 use Timberhub\Supplier\Application\Service\SupplierService;
+use Timberhub\Supplier\Domain\Actions\DeleteSupplierAction;
+use Timberhub\Supplier\Domain\Models\Supplier;
 
 class SupplierList extends LivewireDatatable
 {
@@ -31,5 +34,13 @@ class SupplierList extends LivewireDatatable
     public function search() : void
     {
         $this->render();
+    }
+
+    public function delete(int $id) : Redirector
+    {
+        $supplier = Supplier::find($id);
+        DeleteSupplierAction::execute($supplier);
+        session()->flash('danger', 'Supplier is successfully deleted');
+        return redirect()->route('suppliers.index');
     }
 }
