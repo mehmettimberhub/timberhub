@@ -25,13 +25,21 @@ class ProductApiController extends Controller
     }
 
     /**
-     * @OA\Get(path="/products",
+     * @OA\Get(path="/api/products",
      *     tags={"products"},
      *     summary="Get all products",
      *     operationId="product-list",
-     *     @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#components/schemas/ProductListRequest"),
+     *     @OA\Parameter(
+     *          name="searchTerm",
+     *          in="path",
+     *          required=false,
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\Parameter(
+     *          name="supplier_id",
+     *          in="path",
+     *          required=false,
+     *          @OA\Schema(type="integer")
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -51,7 +59,7 @@ class ProductApiController extends Controller
     }
 
     /**
-     * @OA\Post(path="/products",
+     * @OA\Post(path="/api/products",
      *  tags={"products"},
      *  summary="Create a new product",
      *  operationId="products-create",
@@ -82,7 +90,7 @@ class ProductApiController extends Controller
     }
 
     /**
-     * @OA\Put(path="/products/{product}",
+     * @OA\Put(path="/api/products/{product}",
      *  tags={"products"},
      *  summary="Update a product",
      *  operationId="products-update",

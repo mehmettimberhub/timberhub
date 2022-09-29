@@ -26,13 +26,15 @@ class SupplierApiController extends Controller
     }
 
     /**
-     * @OA\Get(path="suppliers",
+     * @OA\Get(path="/api/suppliers",
      *     tags={"suppliers"},
      *     summary="Get all suppliers",
      *     operationId="supplier-list",
-     *     @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#components/schemas/SupplierListRequest"),
+     *     @OA\Parameter(
+     *          name="searchTerm",
+     *          in="path",
+     *          required=false,
+     *          @OA\Schema(type="string")
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -52,8 +54,8 @@ class SupplierApiController extends Controller
     }
 
     /**
-     * @OA\Post(path="/supplier",
-     *  tags={"supplier"},
+     * @OA\Post(path="/api/suppliers",
+     *  tags={"suppliers"},
      *  summary="Create a new supplier",
      *  operationId="suppliers-create",
      *  @OA\RequestBody(
@@ -83,7 +85,7 @@ class SupplierApiController extends Controller
     }
 
     /**
-     * @OA\Put(path="/suppliers/{supplier}",
+     * @OA\Put(path="/api/suppliers/{supplier}",
      *  tags={"suppliers"},
      *  summary="Edit Supplier",
      *  operationId="suppliers-edit",
@@ -133,7 +135,7 @@ class SupplierApiController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="suppliers/{supplier}",
+     *     path="/api/suppliers/{supplier}",
      *      tags={"suppliers"},
      *     summary="This method is for deleting supplier",
      *     operationId="delete-supplier",

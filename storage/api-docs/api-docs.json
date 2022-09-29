@@ -6,23 +6,31 @@
     },
     "paths": {
         "/api/": {},
-        "/products": {
+        "/api/products": {
             "get": {
                 "tags": [
                     "products"
                 ],
                 "summary": "Get all products",
                 "operationId": "product-list",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#components/schemas/ProductListRequest"
-                            }
+                "parameters": [
+                    {
+                        "name": "searchTerm",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "supplier_id",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Country list data",
@@ -76,7 +84,7 @@
                 }
             }
         },
-        "/products/{product}": {
+        "/api/products/{product}": {
             "put": {
                 "tags": [
                     "products"
@@ -142,23 +150,23 @@
                 }
             }
         },
-        "suppliers": {
+        "/api/suppliers": {
             "get": {
                 "tags": [
                     "suppliers"
                 ],
                 "summary": "Get all suppliers",
                 "operationId": "supplier-list",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#components/schemas/SupplierListRequest"
-                            }
+                "parameters": [
+                    {
+                        "name": "searchTerm",
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Country list data",
@@ -171,12 +179,10 @@
                         }
                     }
                 }
-            }
-        },
-        "/supplier": {
+            },
             "post": {
                 "tags": [
-                    "supplier"
+                    "suppliers"
                 ],
                 "summary": "Create a new supplier",
                 "operationId": "suppliers-create",
@@ -214,7 +220,7 @@
                 }
             }
         },
-        "/suppliers/{supplier}": {
+        "/api/suppliers/{supplier}": {
             "put": {
                 "tags": [
                     "suppliers"
@@ -277,9 +283,7 @@
                         }
                     }
                 }
-            }
-        },
-        "suppliers/{supplier}": {
+            },
             "delete": {
                 "tags": [
                     "suppliers"
