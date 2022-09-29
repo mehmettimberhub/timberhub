@@ -18,7 +18,7 @@ class ProductService
             $query = $query->where(fn($q) =>
                 $q->where('species', 'like', '%' . $search . '%')
                 ->orWhere('grading_system', 'like', '%' . $search . '%')
-                ->orWhere('grading', 'like', '%' . $search . '%')
+                ->orWhere('grading', '=', $search)
                 ->orWhere('dying_method', 'like', '%' . $search . '%')
                 ->orWhere('treatment', 'like', '%' . $search . '%')
             );

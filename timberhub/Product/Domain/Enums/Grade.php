@@ -5,6 +5,7 @@ namespace Timberhub\Product\Domain\Enums;
 enum Grade : string
 {
     use HasTitleValue;
+    use HasCaseValues;
 
     case A1 = 'A1';
     case A2 = 'A2';

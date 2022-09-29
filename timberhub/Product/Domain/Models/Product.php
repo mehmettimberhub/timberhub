@@ -12,6 +12,39 @@ use Timberhub\Product\Domain\Enums\ProductSpecies;
 use Timberhub\Product\Domain\Enums\Treatment;
 use Timberhub\Supplier\Domain\Models\Supplier;
 
+/**
+ * Timberhub\Product\Domain\Models\Product
+ *
+ * @property int $id
+ * @property ProductSpecies $species
+ * @property GradingSystem $grading_system
+ * @property Grade $grading
+ * @property DyingMethod $dying_method
+ * @property Treatment|null $treatment
+ * @property int $thickness
+ * @property int $width
+ * @property int $length
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Supplier[] $suppliers
+ * @property-read int|null $suppliers_count
+ * @method static \Database\Factories\Timberhub\Product\Domain\Models\ProductFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDyingMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereGrading($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereGradingSystem($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSpecies($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereThickness($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereTreatment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereWidth($value)
+ * @mixin \Eloquent
+ */
 final class Product extends Model
 {
     use HasFactory;

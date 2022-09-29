@@ -5,6 +5,7 @@ namespace Timberhub\Product\Domain\Enums;
 enum TegernseerGrade: string
 {
     use HasTitleValue;
+    use HasCaseValues;
 
     case O = 'O';
     case I = 'I';

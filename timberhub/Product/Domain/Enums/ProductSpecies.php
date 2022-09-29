@@ -5,6 +5,7 @@ namespace Timberhub\Product\Domain\Enums;
 enum ProductSpecies : string
 {
     use HasTitleValue;
+    use HasCaseValues;
 
     case PINE = 'pine';
     case SPRUCE = 'spruce';
