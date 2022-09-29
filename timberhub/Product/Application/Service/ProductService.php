@@ -8,7 +8,7 @@ use Timberhub\Supplier\Domain\Models\Supplier;
 
 class ProductService
 {
-    public function getAllPaginated(int $perPage, string $sortField, bool $sortAsc, string $search, ?int $supplier_id = null): LengthAwarePaginator
+    public function getAllPaginated(int $perPage, string $sortField, bool $sortAsc, ?string $search = null, ?int $supplier_id = null): LengthAwarePaginator
     {
         $query = Product::query();
         if($supplier_id){

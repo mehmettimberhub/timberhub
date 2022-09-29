@@ -7,7 +7,7 @@ use Timberhub\Supplier\Domain\Models\Supplier;
 
 final class SaveSupplierAction
 {
-    public static function execute(SupplierData $supplierData, Supplier $supplier) : Supplier
+    public static function execute(SupplierData $supplierData, ?Supplier $supplier = null) : Supplier
     {
         return Supplier::updateOrCreate(
             [

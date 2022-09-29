@@ -8,6 +8,7 @@ use Timberhub\Product\Domain\Enums\Grade;
 use Timberhub\Product\Domain\Enums\GradingSystem;
 use Timberhub\Product\Domain\Enums\ProductSpecies;
 use Timberhub\Product\Domain\Enums\Treatment;
+use Timberhub\Product\UI\Requests\CreateProductRequest;
 
 class ProductData extends Data
 {
@@ -22,5 +23,19 @@ class ProductData extends Data
         public int $length,
     )
     {
+    }
+
+    public static function fromRequest(CreateProductRequest $request)
+    {
+        return new self(
+            ProductSpecies::tryFrom($request->species),
+            GradingSystem::tryFrom($request->gradingSystem),
+            Grade::tryFrom($request->grade),
+            DyingMethod::tryFrom($request->dyingMethod),
+            Treatment::tryFrom($request->treatment),
+            $request->thickness,
+            $request->width,
+            $request->length
+        );
     }
 }
