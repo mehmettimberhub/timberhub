@@ -1,6 +1,6 @@
 <?php
 
-namespace Timberhub\Product\Domain\DTOs;
+namespace Timberhub\Supplier\Domain\DTOs;
 
 use Spatie\LaravelData\Data;
 

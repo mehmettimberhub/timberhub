@@ -4,8 +4,8 @@ namespace App\Http\Livewire\Supplier;
 
 use Illuminate\View\View;
 use Livewire\Component;
-use Timberhub\Product\Domain\DTOs\SupplierData;
 use Timberhub\Supplier\Domain\Actions\SaveSupplierAction;
+use Timberhub\Supplier\Domain\DTOs\SupplierData;
 use Timberhub\Supplier\Domain\Models\Supplier;
 
 class SupplierForm extends Component

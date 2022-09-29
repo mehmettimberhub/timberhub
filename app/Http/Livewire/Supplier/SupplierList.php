@@ -33,6 +33,7 @@ class SupplierList extends LivewireDatatable
 
     public function search() : void
     {
+        $this->resetPage();
         $this->render();
     }
 

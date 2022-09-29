@@ -9,7 +9,7 @@
     <div class="col-sm-12 col-md-12">
         <div class="row">
             <div class="form-group col-md-3">
-                <label for="product_id" class="col-form-label text-left ">Search</label>
+                <label for="product_id" class="col-form-label text-left">Search</label>
                 <div class="input-group">
                     <input style="display: inline-block; width: auto;" type="search"
                            wire:model.defer="searchTerm" class="form-control form-control-sm" placeholder=""

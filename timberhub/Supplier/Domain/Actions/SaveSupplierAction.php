@@ -2,7 +2,7 @@
 
 namespace Timberhub\Supplier\Domain\Actions;
 
-use Timberhub\Product\Domain\DTOs\SupplierData;
+use Timberhub\Supplier\Domain\DTOs\SupplierData;
 use Timberhub\Supplier\Domain\Models\Supplier;
 
 final class SaveSupplierAction
