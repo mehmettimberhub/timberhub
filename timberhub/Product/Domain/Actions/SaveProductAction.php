@@ -7,7 +7,7 @@ use Timberhub\Product\Domain\Models\Product;
 
 class SaveProductAction
 {
-    public static function execute(ProductData $data, ?Product $product = null, array $suppliers) : Product
+    public static function execute(ProductData $data, ?Product $product = null, ?array $suppliers = null) : Product
     {
         $product =  Product::updateOrCreate(
             [

@@ -44,7 +44,7 @@ class ProductApiController extends Controller
     {
         return new JsonResponse(
             ProductResource::formatCollection(
-                $this->service->getAllPaginated(20, 'id', true, $request->searchTerm, $request->product_id),
+                $this->service->getAllPaginated(20, 'id', true, $request->searchTerm, $request->supplier_id),
                 ['Products successfully fetched']
             )
         );
