@@ -5,10 +5,10 @@
         </a>
     </x-slot>
     <x-slot name="extra_criterias">
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
             <label class="col-form-label text-left" for="inputGroupSelect01">Supplier</label>
             <div class="input-group">
-                <select class="custom-select" style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: auto;" wire:model.defer="supplier_id" id="inputGroupSelect01">
+                <select class="custom-select" style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: 100%;" wire:model.defer="supplier_id" id="inputGroupSelect01">
                     <option value="0" selected>Choose...</option>
                     @foreach(\Timberhub\Supplier\Domain\Models\Supplier::all() as $supplier)
                         <option value="{{$supplier->id}}">{{$supplier->name}}</option>
