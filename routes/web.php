@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Timberhub\Product\UI\Http\ProductsController;
 use Timberhub\Supplier\UI\Http\SuppliersController;
+use App\Http\Controllers\Products\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +17,4 @@ use Timberhub\Supplier\UI\Http\SuppliersController;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
-Route::resource('suppliers', SuppliersController::class);
 Route::resource('products', ProductsController::class);

@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Product;
 
 use App\Http\Livewire\LivewireDatatable;
 use Livewire\Redirector;
-use Timberhub\Product\Application\Service\ProductService;
-use Timberhub\Product\Domain\Actions\DeleteProductAction;
-use Timberhub\Product\Domain\Models\Product;
+use App\Services\Products\ProductService;
+use App\Actions\Products\DeleteProductAction;
+use App\Models\Products\Product;
 
 class ProductList extends LivewireDatatable
 {

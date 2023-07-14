@@ -5,14 +5,14 @@ namespace App\Http\Livewire\Product;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Redirector;
-use Timberhub\Product\Domain\Actions\SaveProductAction;
-use Timberhub\Product\Domain\DTOs\ProductData;
-use Timberhub\Product\Domain\Enums\DyingMethod;
-use Timberhub\Product\Domain\Enums\Grade;
-use Timberhub\Product\Domain\Enums\GradingSystem;
-use Timberhub\Product\Domain\Enums\ProductSpecies;
-use Timberhub\Product\Domain\Enums\Treatment;
-use Timberhub\Product\Domain\Models\Product;
+use App\Actions\Products\SaveProductAction;
+use App\DTO\Products\ProductData;
+use App\Enums\Products\DyingMethod;
+use App\Enums\Products\Grade;
+use App\Enums\Products\GradingSystem;
+use App\Enums\Products\ProductSpecies;
+use App\Enums\Products\Treatment;
+use App\Models\Products\Product;
 
 class ProductForm extends Component
 {
