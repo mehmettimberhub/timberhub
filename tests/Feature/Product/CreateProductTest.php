@@ -1,43 +1,26 @@
 <?php
 
-namespace Tests\Feature\Timberhub\Product\UI\Http;
+namespace Tests\Feature\Product;
 
 use App\Http\Livewire\Product\ProductForm;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Timberhub\Product\Domain\Enums\DyingMethod;
-use Timberhub\Product\Domain\Enums\Grade;
-use Timberhub\Product\Domain\Enums\GradingSystem;
-use Timberhub\Product\Domain\Enums\NordicBlueGrade;
-use Timberhub\Product\Domain\Enums\ProductSpecies;
-use Timberhub\Product\Domain\Enums\Treatment;
-use Timberhub\Product\Domain\Models\Product;
-use Timberhub\Supplier\Domain\Models\Supplier;
+use App\Enums\Products\DyingMethod;
+use App\Enums\Products\Grade;
+use App\Enums\Products\GradingSystem;
+use App\Enums\Products\NordicBlueGrade;
+use App\Enums\Products\ProductSpecies;
+use App\Enums\Products\Treatment;
+use App\Models\Products\Product;
 
 class CreateProductTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected const SUPPLIER_ONE_NAME = 'supplier1';
-    protected const SUPPLIER_TWO_NAME = 'supplier2';
-    protected const SUPPLIER_THREE_NAME = 'supplier3';
-
     protected function setUp(): void
     {
         parent::setUp();
-        Supplier::factory()->count(3)
-            ->sequence(
-                [
-                    'name' => self::SUPPLIER_ONE_NAME
-                ],
-                [
-                    'name' => self::SUPPLIER_TWO_NAME
-                ],
-                [
-                    'name' => self::SUPPLIER_THREE_NAME
-                ]
-            )->create();
     }
 
     public function testCreateProduct(): void
@@ -48,12 +31,13 @@ class CreateProductTest extends TestCase
             'grading_system' => GradingSystem::NORDIC_BLUE->value,
             'dying_method' => DyingMethod::KILN->value,
             'species' => ProductSpecies::BIRCH->value,
+        ]);
+        $this->assertDatabaseMissing('product_variations', [
             'length' => 220,
             'width' => 30,
             'thickness' => 120
         ]);
         Livewire::test(ProductForm::class)
-            ->set('suppliers', Supplier::all()->pluck('id')->toArray())
             ->set('product', null)
             ->set('length', 220)
             ->set('width', 30)
@@ -71,13 +55,12 @@ class CreateProductTest extends TestCase
             'grading_system' => GradingSystem::NORDIC_BLUE->value,
             'dying_method' => DyingMethod::KILN->value,
             'species' => ProductSpecies::BIRCH->value,
+        ]);
+        $this->assertDatabaseHas('product_variations', [
             'length' => 220,
             'width' => 30,
             'thickness' => 120
         ]);
-
-        $product = Product::whereDyingMethod(DyingMethod::KILN->value)->first();
-        self::assertEquals(3, $product->suppliers->count());
     }
 
     public function testCannotCreateProductWithMissingRequiredProperties(): void
@@ -87,12 +70,13 @@ class CreateProductTest extends TestCase
             'grading' => Grade::A2->value,
             'grading_system' => GradingSystem::NORDIC_BLUE->value,
             'dying_method' => DyingMethod::KILN->value,
+        ]);
+        $this->assertDatabaseMissing('product_variations', [
             'length' => 220,
             'width' => 30,
             'thickness' => 120
         ]);
         Livewire::test(ProductForm::class)
-            ->set('suppliers', Supplier::all()->pluck('id')->toArray())
             ->set('product', null)
             ->set('length', 220)
             ->set('width', 30)
@@ -108,6 +92,8 @@ class CreateProductTest extends TestCase
             'grading' => Grade::A2->value,
             'grading_system' => GradingSystem::NORDIC_BLUE->value,
             'dying_method' => DyingMethod::KILN->value,
+        ]);
+        $this->assertDatabaseMissing('product_variations', [
             'length' => 220,
             'width' => 30,
             'thickness' => 120

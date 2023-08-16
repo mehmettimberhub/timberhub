@@ -6,14 +6,14 @@ use App\Http\Livewire\Product\ProductForm;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Timberhub\Product\Domain\Enums\DyingMethod;
-use Timberhub\Product\Domain\Enums\Grade;
-use Timberhub\Product\Domain\Enums\GradingSystem;
-use Timberhub\Product\Domain\Enums\NordicBlueGrade;
-use Timberhub\Product\Domain\Enums\ProductSpecies;
-use Timberhub\Product\Domain\Enums\Treatment;
-use Timberhub\Product\Domain\Models\Product;
-use Timberhub\Supplier\Domain\Models\Supplier;
+use App\Enums\Products\DyingMethod;
+use App\Enums\Products\Grade;
+use App\Enums\Products\GradingSystem;
+use App\Enums\Products\NordicBlueGrade;
+use App\Enums\Products\ProductSpecies;
+use App\Enums\Products\TegernseerGrade;
+use App\Enums\Products\Treatment;
+use App\Models\Products\Product;
 
 class UpdateProducApiTest extends TestCase
 {
@@ -29,9 +29,6 @@ class UpdateProducApiTest extends TestCase
             'grading' => NordicBlueGrade::A1,
             'dying_method' => DyingMethod::AIR_DRIED,
             'treatment' => Treatment::ANTI_STAIN,
-            'length' => 1200,
-            'thickness' => 120,
-            'width' => 30,
         ]);
         $this->product = $product;
     }
@@ -43,7 +40,7 @@ class UpdateProducApiTest extends TestCase
             'grading' => Grade::A2
         ]);
 
-        $this->put('/api/products/' . $this->product->id, [
+        $response = $this->put('/api/products/' . $this->product->id, [
             'length' => 220,
             'width' => 30,
             'thickness' => 120,
@@ -52,7 +49,6 @@ class UpdateProducApiTest extends TestCase
             'gradingSystem' => GradingSystem::NORDIC_BLUE->value,
             'dyingMethod'=> DyingMethod::KILN->value,
             'species'=> ProductSpecies::BIRCH->value,
-            'suppliers' => []
         ]);
 
         $this->assertDatabaseHas('products', [

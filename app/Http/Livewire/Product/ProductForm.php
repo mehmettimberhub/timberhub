@@ -34,14 +34,15 @@ class ProductForm extends LivewireDatatable
     public function render() : View
     {
         $this->service = app(ProductService::class);
+        $records = $this->service->getVariationsOfProductPaginated(
+            $this->product,
+            $this->showPerPage,
+            $this->sortField,
+            $this->sortAsc,
+            $this->searchTerm
+        );
         return view('livewire.product.product-form', [
-            'records' => $this->service->getVariationsOfProductPaginated(
-                $this->product,
-                $this->showPerPage,
-                $this->sortField,
-                $this->sortAsc,
-                $this->searchTerm
-            )
+            'records' => $records,
         ]);
     }
 

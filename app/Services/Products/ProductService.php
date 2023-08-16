@@ -21,8 +21,11 @@ class ProductService
         return $query->orderBy($sortField, $sortAsc ? 'asc' : 'desc')->paginate($perPage);
     }
 
-    public function getVariationsOfProductPaginated(Product $product, int $perPage, string $sortField, bool $sortAsc, ?string $search = null): LengthAwarePaginator
+    public function getVariationsOfProductPaginated(?Product $product = null, int $perPage = 20, string $sortField = 'thickness', bool $sortAsc = true, ?string $search = null): ?LengthAwarePaginator
     {
+        if (!$product instanceof Product) {
+            return null;
+        }
         $query = $product->productVariations();
         if ($search !== '') {
             $query = $query->where(fn($q) => $q->where('thickness', 'like', '%' . $search . '%')

@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Timberhub\Product\UI\Http\ProductApiController;
-use Timberhub\Supplier\UI\Http\SupplierApiController;
+use App\Http\Controllers\Products\ProductApiController;
 
 /*
 |--------------------------------------------------------------------------

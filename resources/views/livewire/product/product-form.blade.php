@@ -110,33 +110,34 @@
                     </div>
                 </div>
                 <hr>
-                <x-datatable :records="$records">
-                    <x-slot name="createButton"></x-slot>
-                    <x-slot name="thead">
-                        <tr>
-                            <th>Thickness</th>
-                            <th>Width</th>
-                            <th>Length</th>
-                            <th>Action</th>
-                        </tr>
-                    </x-slot>
-                    <x-slot name="tbody">
-                        @foreach($records as $record)
+                @if($records)
+                    <x-datatable :records="$records">
+                        <x-slot name="createButton"></x-slot>
+                        <x-slot name="thead">
                             <tr>
-                                <td>{{ $record->thickness }}</td>
-                                <td>{{ $record->width }}</td>
-                                <td>{{ $record->length }}</td>
-
-                                <td>
-                                    <button type="button" wire:click="deleteVariation({{$record->id}})" class="btn btn-danger btn-xs"><i
-                                            class="fa fa-trash"></i>
-                                    </button>
-                                </td>
+                                <th>Thickness</th>
+                                <th>Width</th>
+                                <th>Length</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
-                    </x-slot>
-                </x-datatable>
+                        </x-slot>
+                        <x-slot name="tbody">
+                            @foreach($records as $record)
+                                <tr>
+                                    <td>{{ $record->thickness }}</td>
+                                    <td>{{ $record->width }}</td>
+                                    <td>{{ $record->length }}</td>
 
+                                    <td>
+                                        <button type="button" wire:click="deleteVariation({{$record->id}})" class="btn btn-danger btn-xs"><i
+                                                class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </x-slot>
+                    </x-datatable>
+                @endif
             </div>
         </div>
 

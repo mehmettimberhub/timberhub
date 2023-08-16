@@ -54,12 +54,6 @@ use App\Enums\Products\Treatment;
  *     type="int",
  *     example="1200",
  * ),
- * @OA\Property(
- *     property="suppliers",
- *     type="array",
- *     @OA\Items(),
- *      example="[1, 2]"
- * ),
  */
 class CreateProductRequest extends JsonRequest
 {
@@ -76,7 +70,6 @@ class CreateProductRequest extends JsonRequest
             'thickness' => 'required|integer',
             'width' => 'required|integer',
             'length' => 'required|integer',
-            'suppliers' => 'nullable|array'
         ];
         if($this->gradingSystem === GradingSystem::NORDIC_BLUE->value){
             $rules['grade'] = 'required|in:' . implode(',', NordicBlueGrade::caseValues());

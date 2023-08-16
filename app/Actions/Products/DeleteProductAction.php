@@ -2,7 +2,7 @@
 
 namespace App\Actions\Products;
 
-use Timberhub\Product\Domain\Models\Product;
+use App\Models\Products\Product;
 
 class DeleteProductAction
 {

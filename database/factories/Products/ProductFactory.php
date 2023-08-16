@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Factories\Timberhub\Product\Domain\Models;
+namespace Database\Factories\Products;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
-use Timberhub\Product\Domain\Models\Product;
+use App\Models\Products\Product;
 
 
 final class ProductFactory extends Factory
@@ -21,9 +21,6 @@ final class ProductFactory extends Factory
             'grading' => $productAttributes['grading'],
             'dying_method' => $productAttributes['dying_method'],
             'treatment' => $productAttributes['treatment'],
-            'thickness' => $productAttributes['thickness'],
-            'width' => $productAttributes['width'],
-            'length' => $productAttributes['length'],
         ];
     }
 
@@ -42,18 +39,12 @@ final class ProductFactory extends Factory
         $grading = $gradingSystem === 'nordic_blue' ? $gradingNordicArray[random_int(0, 4)] : $gradingTagernseerArray[random_int(0, 5)];
         $dying = $dyingMethodArray[random_int(0, 2)];
         $treatment = $treatmentArray[random_int(0, 1)];
-        $thickness = random_int(3, 9) * 10;
-        $width = random_int(9, 15) * 10;
-        $length = random_int(12, 30) * 100;
 
         $existingProduct = Product::whereSpecies($species)
             ->whereGradingSystem($gradingSystem)
             ->whereGrading($grading)
             ->whereDyingMethod($dying)
             ->whereTreatment($treatment)
-            ->whereThickness($thickness)
-            ->whereWidth($width)
-            ->whereLength($length)
             ->first();
 
         if (!$existingProduct instanceof Product) {
@@ -63,9 +54,6 @@ final class ProductFactory extends Factory
                 'grading' => $grading,
                 'dying_method' => $dying,
                 'treatment' => $treatment,
-                'thickness' => $thickness,
-                'width' => $width,
-                'length' => $length,
             ];
         }
 

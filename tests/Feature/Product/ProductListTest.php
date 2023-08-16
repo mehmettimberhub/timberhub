@@ -1,18 +1,19 @@
 <?php
 
-namespace Tests\Feature\Timberhub\Product\UI\Http;
+namespace Tests\Feature\Product;
 
 use App\Http\Livewire\Product\ProductList;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Timberhub\Product\Domain\Enums\DyingMethod;
-use Timberhub\Product\Domain\Enums\GradingSystem;
-use Timberhub\Product\Domain\Enums\NordicBlueGrade;
-use Timberhub\Product\Domain\Enums\ProductSpecies;
-use Timberhub\Product\Domain\Enums\TegernseerGrade;
-use Timberhub\Product\Domain\Enums\Treatment;
-use Timberhub\Product\Domain\Models\Product;
+use App\Enums\Products\DyingMethod;
+use App\Enums\Products\Grade;
+use App\Enums\Products\GradingSystem;
+use App\Enums\Products\NordicBlueGrade;
+use App\Enums\Products\ProductSpecies;
+use App\Enums\Products\TegernseerGrade;
+use App\Enums\Products\Treatment;
+use App\Models\Products\Product;
 
 class ProductListTest extends TestCase
 {
@@ -28,9 +29,6 @@ class ProductListTest extends TestCase
                 'grading' => NordicBlueGrade::A1,
                 'dying_method' => DyingMethod::AIR_DRIED,
                 'treatment' => Treatment::ANTI_STAIN,
-                'length' => 1200,
-                'thickness' => 120,
-                'width' => 30,
             ],
             [
                 'species' => ProductSpecies::APPLE,
@@ -38,9 +36,6 @@ class ProductListTest extends TestCase
                 'grading' => NordicBlueGrade::A2,
                 'dying_method' => DyingMethod::KILN,
                 'treatment' => Treatment::ANTI_STAIN,
-                'length' => 1200,
-                'thickness' => 120,
-                'width' => 30,
             ],
             [
                 'species' => ProductSpecies::FIR,
@@ -48,9 +43,6 @@ class ProductListTest extends TestCase
                 'grading' => TegernseerGrade::I,
                 'dying_method' => DyingMethod::FRESH,
                 'treatment' => Treatment::HEAT,
-                'length' => 1200,
-                'thickness' => 120,
-                'width' => 30,
             ],
             [
                 'species' => ProductSpecies::PINE,
@@ -58,9 +50,6 @@ class ProductListTest extends TestCase
                 'grading' => TegernseerGrade::II,
                 'dying_method' => DyingMethod::AIR_DRIED,
                 'treatment' => Treatment::ANTI_STAIN,
-                'length' => 1200,
-                'thickness' => 120,
-                'width' => 30,
             ]
         )->create();
     }

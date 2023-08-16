@@ -3,10 +3,10 @@
 namespace App\Http\Resources\Products;
 
 use App\Http\Resources\JsonCommonResource;
+use App\Services\Products\ProductService;
 use JetBrains\PhpStorm\ArrayShape;
 use OpenApi\Annotations as OA;
 use App\Models\Products\Product;
-use function PHPUnit\Framework\assertEquals;
 
 /**
  * @OA\Schema(title="SupplierResource"),
@@ -36,19 +36,9 @@ use function PHPUnit\Framework\assertEquals;
  *     example="anti_stain",
  * ),
  * @OA\Property(
- *     property="thickness",
- *     type="int",
- *     example="30",
- * ),
- * @OA\Property(
- *     property="width",
- *     type="int",
- *     example="120",
- * ),
- * @OA\Property(
- *     property="length",
- *     type="int",
- *     example="1200",
+ *     property="variations",
+ *     type="array",
+ *     @OA\JsonContent(ref="#/components/schemas/ProductVariationResource"),
  * ),
  */
 final class ProductResource extends JsonCommonResource
@@ -56,6 +46,7 @@ final class ProductResource extends JsonCommonResource
     public function getData(): ?array
     {
         assert($this->resource instanceof Product);
+        $service = app(ProductService::class);
         return [
             'id' => $this->resource->id,
             'species' => $this->resource->species,
@@ -63,6 +54,9 @@ final class ProductResource extends JsonCommonResource
             'gradingSystem' => $this->resource->grading_system,
             'grade' => $this->resource->grading,
             'treatment' => $this->resource->treatment,
+            'variations' => ProductVariationResorce::formatCollection(
+                $service->getVariationsOfProductPaginated($this->resource)
+            ),
         ];
     }
 }
