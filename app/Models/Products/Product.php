@@ -10,6 +10,7 @@ use App\Enums\Products\Grade;
 use App\Enums\Products\GradingSystem;
 use App\Enums\Products\ProductSpecies;
 use App\Enums\Products\Treatment;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Timberhub\Product\Domain\Models\Product
@@ -57,4 +58,9 @@ final class Product extends Model
         'dying_method' => DyingMethod::class,
         'treatment' => Treatment::class
     ];
+
+    public function productVariations(): HasMany
+    {
+        return $this->hasMany(ProductVariation::class);
+    }
 }

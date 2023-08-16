@@ -16,7 +16,6 @@
                            aria-controls="sorting-datatable" tabindex="5">
                 </div>
             </div>
-            {{$extra_criterias}}
             <div class="col-md-1">
                 <button wire:click="search" type="button" style="margin-top: 2.3rem"
                         class="btn btn-outline-dark btn-sm"><i class="fas fa-search"></i></button>

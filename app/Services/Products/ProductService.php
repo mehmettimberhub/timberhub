@@ -20,4 +20,16 @@ class ProductService
         }
         return $query->orderBy($sortField, $sortAsc ? 'asc' : 'desc')->paginate($perPage);
     }
+
+    public function getVariationsOfProductPaginated(Product $product, int $perPage, string $sortField, bool $sortAsc, ?string $search = null): LengthAwarePaginator
+    {
+        $query = $product->productVariations();
+        if ($search !== '') {
+            $query = $query->where(fn($q) => $q->where('thickness', 'like', '%' . $search . '%')
+                ->orWhere('width', 'like', '%' . $search . '%')
+                ->orWhere('length', 'like', '%' . $search . '%')
+            );
+        }
+        return $query->orderBy($sortField, $sortAsc ? 'asc' : 'desc')->paginate($perPage);
+    }
 }

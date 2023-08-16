@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire\Product;
 
+use App\Actions\Products\DeleteProductVariationAction;
+use App\Http\Livewire\LivewireDatatable;
+use App\Services\Products\ProductService;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Redirector;
@@ -14,7 +17,7 @@ use App\Enums\Products\ProductSpecies;
 use App\Enums\Products\Treatment;
 use App\Models\Products\Product;
 
-class ProductForm extends Component
+class ProductForm extends LivewireDatatable
 {
     public ?Product $product = null;
     public ?string $species = null;
@@ -25,11 +28,21 @@ class ProductForm extends Component
     public ?int $thickness = null;
     public ?int $width = null;
     public ?int $length = null;
-    public mixed $suppliers = [];
+    protected ProductService $service;
+    public string $sortField = 'thickness';
 
     public function render() : View
     {
-        return view('livewire.product.product-form');
+        $this->service = app(ProductService::class);
+        return view('livewire.product.product-form', [
+            'records' => $this->service->getVariationsOfProductPaginated(
+                $this->product,
+                $this->showPerPage,
+                $this->sortField,
+                $this->sortAsc,
+                $this->searchTerm
+            )
+        ]);
     }
 
     public function mount(?Product $product) : void
@@ -44,7 +57,6 @@ class ProductForm extends Component
             $this->thickness = $this->product->thickness;
             $this->width = $this->product->width;
             $this->length = $this->product->length;
-            $this->suppliers = $this->product->suppliers->pluck('id')->toArray();
         }
     }
 
@@ -63,6 +75,13 @@ class ProductForm extends Component
         ];
     }
 
+    public function deleteVariation(int $productVariationId) : void
+    {
+        DeleteProductVariationAction::execute($productVariationId);
+        session()->flash('danger', 'Product variation is successfully deleted');
+        $this->render();
+    }
+
     public function submit() : Redirector
     {
         $this->validate($this->rules());
@@ -76,7 +95,7 @@ class ProductForm extends Component
             width: $this->width,
             length: $this->length
         );
-        $product = SaveProductAction::execute($data, $this->product, $this->suppliers);
+        $product = SaveProductAction::execute($data, $this->product);
         session()->flash('success', 'Product saved successfully');
         return redirect()->route('products.edit', ['product' => $product]);
     }

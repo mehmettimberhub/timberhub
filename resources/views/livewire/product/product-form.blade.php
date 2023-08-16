@@ -9,7 +9,7 @@
                                 style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: 100%;"
                                 wire:model="species" id="species-select">
                             <option value="0" selected>Choose...</option>
-                            @foreach(\Timberhub\Product\Domain\Enums\ProductSpecies::cases() as $s)
+                            @foreach(\App\Enums\Products\ProductSpecies::cases() as $s)
                                 <option value="{{$s->value}}">{{$s->getValue()}}</option>
                             @endforeach
                         </select>
@@ -23,7 +23,7 @@
                                 style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: 100%;"
                                 wire:model="gradingSystem" id="gradingSystem-select">
                             <option value="0" selected>Choose...</option>
-                            @foreach(\Timberhub\Product\Domain\Enums\GradingSystem::cases() as $s)
+                            @foreach(\App\Enums\Products\GradingSystem::cases() as $s)
                                 <option value="{{$s->value}}">{{$s->getValue()}}</option>
                             @endforeach
                         </select>
@@ -33,10 +33,10 @@
                         @endif
                     </div>
                     @php
-                        if($gradingSystem === \Timberhub\Product\Domain\Enums\GradingSystem::NORDIC_BLUE->value){
-                            $grades = \Timberhub\Product\Domain\Enums\NordicBlueGrade::cases();
+                        if($gradingSystem === \App\Enums\Products\GradingSystem::NORDIC_BLUE->value){
+                            $grades = \App\Enums\Products\Grade::cases();
                         }else{
-                            $grades = \Timberhub\Product\Domain\Enums\TegernseerGrade::cases();
+                            $grades = \App\Enums\Products\Grade::cases();
                         }
                     @endphp
                     <div class="form-group col-6 {{($errors->first('grade')?'has-error':'')}}">
@@ -59,7 +59,7 @@
                                 style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: 100%;"
                                 wire:model="dyingMethod" id="dyingMethod-select">
                             <option value="0" selected>Choose...</option>
-                            @foreach(\Timberhub\Product\Domain\Enums\DyingMethod::cases() as $s)
+                            @foreach(\App\Enums\Products\DyingMethod::cases() as $s)
                                 <option value="{{$s->value}}">{{$s->getValue()}}</option>
                             @endforeach
                         </select>
@@ -73,7 +73,7 @@
                                 style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: 100%;"
                                 wire:model="treatment" id="treatment-select">
                             <option value="0" selected>Choose...</option>
-                            @foreach(\Timberhub\Product\Domain\Enums\Treatment::cases() as $s)
+                            @foreach(\App\Enums\Products\Treatment::cases() as $s)
                                 <option value="{{$s->value}}">{{$s->getValue()}}</option>
                             @endforeach
                         </select>
@@ -100,7 +100,7 @@
                         @endif
                     </div>
                     <div class="form-group col-2 {{($errors->first('length')?'has-error':'')}}">
-                        <label for="length-select" class="col-form-label text-left">Height *</label>
+                        <label for="length-select" class="col-form-label text-left">Length *</label>
                         <div class="input-group">
                             {!! Form::number('length', null, ['class' => 'form-control'.($errors->first('length')?' form-control-danger':''), 'required' => 'required', 'wire:model'=>'length']) !!}
                         </div>
@@ -108,22 +108,35 @@
                             <div class="form-control-feedback text-danger mt-2">{{$errors->first('length')}}</div>
                         @endif
                     </div>
-
-                    <div class="form-group col-6 {{($errors->first('suppliers')?'has-error':'')}}">
-                        <label for="supplier-select" class="col-form-label text-left">Treatment</label>
-                        <select class="custom-select" multiple
-                                style="height: 31px; border: 1px solid #ced4da; border-radius: 3px; display: inline-block; width: 100%;"
-                                wire:model="suppliers" id="supplier-select">
-                            <option value="0" selected>Choose...</option>
-                            @foreach(\Timberhub\Supplier\Domain\Models\Supplier::all() as $s)
-                                <option {{$suppliers && in_array($s->id, $suppliers, true) ? 'selected' : ''}} value="{{$s->id}}">{{$s->name}}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->first('supplier'))
-                            <div class="form-control-feedback text-danger mt-2">{{$errors->first('supplier')}}</div>
-                        @endif
-                    </div>
                 </div>
+                <hr>
+                <x-datatable :records="$records">
+                    <x-slot name="createButton"></x-slot>
+                    <x-slot name="thead">
+                        <tr>
+                            <th>Thickness</th>
+                            <th>Width</th>
+                            <th>Length</th>
+                            <th>Action</th>
+                        </tr>
+                    </x-slot>
+                    <x-slot name="tbody">
+                        @foreach($records as $record)
+                            <tr>
+                                <td>{{ $record->thickness }}</td>
+                                <td>{{ $record->width }}</td>
+                                <td>{{ $record->length }}</td>
+
+                                <td>
+                                    <button type="button" wire:click="deleteVariation({{$record->id}})" class="btn btn-danger btn-xs"><i
+                                            class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </x-slot>
+                </x-datatable>
+
             </div>
         </div>
 

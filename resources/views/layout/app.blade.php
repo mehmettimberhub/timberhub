@@ -38,12 +38,6 @@
             <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('suppliers.index')}}">
-                            <span data-feather="file" class="align-text-bottom"></span>
-                            Suppliers
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{route('products.index')}}">
                             <span data-feather="shopping-cart" class="align-text-bottom"></span>
                             Products

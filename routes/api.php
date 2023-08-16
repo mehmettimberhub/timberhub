@@ -15,6 +15,5 @@ use Timberhub\Supplier\UI\Http\SupplierApiController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('suppliers',SupplierApiController::class);
 Route::apiResource('products', ProductApiController::class);
 
