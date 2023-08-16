@@ -109,8 +109,9 @@
                         @endif
                     </div>
                 </div>
-                <hr>
+
                 @if($records)
+                    <hr>
                     <x-datatable :records="$records">
                         <x-slot name="createButton"></x-slot>
                         <x-slot name="thead">

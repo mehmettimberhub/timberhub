@@ -11,7 +11,6 @@
             <th>Grade</th>
             <th>Dying Method</th>
             <th>Treatment</th>
-            <th>Dimensions</th>
             <th>Action</th>
         </tr>
     </x-slot>
@@ -23,7 +22,6 @@
                 <td>{{ $record->grading->value }}</td>
                 <td>{{ $record->dying_method->getValue() }}</td>
                 <td>{{ $record->treatment->getValue() }}</td>
-                <td>{{ $record->thickness . 'x' . $record->width . 'x' . $record->length }}</td>
 
                 <td>
                     <a href="{{route('products.edit', ['product' => $record->id])}}"
